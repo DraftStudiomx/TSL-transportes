@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { gsap, MQ, splitWords, useGsap } from "@/lib/gsap";
-import { problems, stats } from "@/lib/site";
+import { asset, problems, stats } from "@/lib/site";
 import { ArrowIcon } from "./Icons";
 
 export default function Intro() {
@@ -75,7 +75,7 @@ export default function Intro() {
       <div className="container">
         <div className="intro-grid">
           <div className="intro-left">
-            <img className="intro-thumb" src="/img/intro-aerial.jpg" alt="" aria-hidden="true" />
+            <img className="intro-thumb" src={asset("/img/intro-aerial.jpg")} alt="" aria-hidden="true" />
             <h2 className="intro-title display-2">
               <span className="muted">{splitWords("Movemos tu carga.")}</span>
               <br />

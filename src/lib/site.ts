@@ -1,5 +1,8 @@
 // Contenido de la página principal. Cuando entre Sanity, estos datos se moverán al CMS.
 
+/** Antepone el basePath (p. ej. /TSL-transportes en GitHub Pages) a rutas de /public. */
+export const asset = (path: string) => `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
+
 export const contact = {
   whatsapp: "524151223039",
   whatsappLabel: "415 122 3039",

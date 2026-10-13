@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { gsap, MQ, useGsap } from "@/lib/gsap";
-import { units } from "@/lib/site";
+import { asset, units } from "@/lib/site";
 
 const MAX_SPEED = 88;
 // Parte del recorrido fijado que ocupa el camión entrando y frenando; el resto recorre las unidades
@@ -81,7 +81,7 @@ export default function Fleet() {
           <div className="fleet-glow" />
           <div className="fleet-truck">
             <span className="truck-shadow" />
-            <img src="/img/truck-tsl.webp" srcSet="/img/truck-tsl-sm.webp 900w, /img/truck-tsl.webp 1708w" sizes="(max-width: 899px) 100vw, 64vw" alt="" />
+            <img src={asset("/img/truck-tsl.webp")} srcSet={`${asset("/img/truck-tsl-sm.webp")} 900w, ${asset("/img/truck-tsl.webp")} 1708w`} sizes="(max-width: 899px) 100vw, 64vw" alt="" />
           </div>
         </div>
 

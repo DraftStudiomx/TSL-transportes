@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { gsap, MQ, useGsap } from "@/lib/gsap";
-import { mailLink, waLink } from "@/lib/site";
+import { asset, mailLink, waLink } from "@/lib/site";
 import { MailIcon, WhatsAppIcon } from "./Icons";
 
 // Puntos interactivos sobre la foto (hero validado con el cliente). x/y en % de la imagen.
@@ -103,8 +103,8 @@ export default function Hero() {
           <span className="truck-shadow" aria-hidden="true" />
           <img
             className="hero-photo"
-            src="/img/truck-tsl.webp"
-            srcSet="/img/truck-tsl-sm.webp 900w, /img/truck-tsl.webp 1708w"
+            src={asset("/img/truck-tsl.webp")}
+            srcSet={`${asset("/img/truck-tsl-sm.webp")} 900w, ${asset("/img/truck-tsl.webp")} 1708w`}
             sizes="(max-width: 899px) 100vw, 60vw"
             alt="Camión de TSL México"
             fetchPriority="high"

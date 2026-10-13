@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, MQ, useGsap } from "@/lib/gsap";
+import { gsap, MQ, stackCards, useGsap } from "@/lib/gsap";
 import { differentiators, safety, waLink } from "@/lib/site";
 import { WhatsAppIcon } from "./Icons";
 
@@ -10,16 +10,8 @@ export default function Safety() {
 
   useGsap(ref, (mm) => {
     mm.add(MQ.motion, () => {
-      // Tarjetas apiladas: la anterior se reduce cuando llega la siguiente
-      const cards = gsap.utils.toArray<HTMLElement>(".safe-card");
-      cards.forEach((card, i) => {
-        if (i === cards.length - 1) return;
-        gsap.to(card, {
-          scale: 0.94,
-          ease: "none",
-          scrollTrigger: { trigger: cards[i + 1], start: "top 85%", end: "top 25%", scrub: true },
-        });
-      });
+      // Tarjetas apiladas tipo archivero
+      stackCards(gsap.utils.toArray<HTMLElement>(".safe-card"), { peek: 72, tab: 14 });
 
       gsap.utils.toArray<HTMLElement>(".diff").forEach((row) => {
         gsap.fromTo(

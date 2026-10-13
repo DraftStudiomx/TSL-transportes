@@ -1,11 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { gsap, MQ, useGsap } from "@/lib/gsap";
+import { gsap, MQ, stackCards, useGsap } from "@/lib/gsap";
 import { asset, units } from "@/lib/site";
 
 const MAX_SPEED = 88;
-// Parte del recorrido fijado que ocupa el camión entrando y frenando; el resto recorre las unidades
+// Parte del recorrido fijado en la que el camión entra y acelera; después sigue en crucero
 const DRIVE_END = 0.45;
 
 export default function Fleet() {
@@ -16,11 +16,12 @@ export default function Fleet() {
   useGsap(ref, (mm) => {
     const speedo = ref.current!.querySelector<HTMLElement>(".speedo-num");
     const truck = ref.current!.querySelector<HTMLElement>(".fleet-truck");
-    // El camión entra desde la izquierda y frena (desaceleración cuadrática); el velocímetro baja a 00
-    const render = (drive: number) => {
+    // Conforme haces scroll el velocímetro sube de 00 a MAX_SPEED mientras el camión entra;
+    // después se queda en crucero y el camión sigue avanzando un poco
+    const render = (drive: number, cruise = 0) => {
       const d = Math.min(1, Math.max(0, drive));
-      if (truck) gsap.set(truck, { xPercent: -75 * (1 - d) ** 2 });
-      if (speedo) speedo.textContent = String(Math.round(MAX_SPEED * (1 - d) ** 1.4)).padStart(2, "0");
+      if (truck) gsap.set(truck, { xPercent: -75 * (1 - d) ** 2 + 5 * cruise });
+      if (speedo) speedo.textContent = String(Math.round(MAX_SPEED * Math.sqrt(d))).padStart(2, "0");
     };
 
     mm.add(MQ.desktop, () => {
@@ -33,7 +34,7 @@ export default function Fleet() {
           pin: true,
           scrub: 0.6,
           onUpdate: (st) => {
-            render(st.progress / DRIVE_END);
+            render(st.progress / DRIVE_END, Math.max(0, (st.progress - DRIVE_END) / (1 - DRIVE_END)));
             // Cada unidad ocupa la misma fracción del recorrido
             const idx = Math.min(units.length - 1, Math.floor(st.progress * units.length));
             if (idx !== activeRef.current) {
@@ -60,17 +61,10 @@ export default function Fleet() {
           },
         }
       );
-      gsap.utils.toArray<HTMLElement>(".unit").forEach((card, i, all) => {
-        if (i === all.length - 1) return;
-        gsap.to(card, {
-          scale: 0.94,
-          ease: "none",
-          scrollTrigger: { trigger: all[i + 1], start: "top 85%", end: "top 20%", scrub: true },
-        });
-      });
+      stackCards(gsap.utils.toArray<HTMLElement>(".unit"));
     });
 
-    // Sin animaciones: se muestra el camión ya detenido
+    // Sin animaciones: se muestra el camión en su lugar
     mm.add("(prefers-reduced-motion: reduce)", () => render(1));
   });
 
@@ -95,7 +89,7 @@ export default function Fleet() {
             </h2>
           </div>
           <div className="speedo">
-            <span className="speedo-num">{String(MAX_SPEED)}</span>
+            <span className="speedo-num">00</span>
             <span className="speedo-unit">km/h</span>
           </div>
         </div>

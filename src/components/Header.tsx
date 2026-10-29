@@ -1,15 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
 import { WhatsAppIcon } from "./Icons";
-import { contact, mailLink, nav, tickerItems, waLink } from "@/lib/site";
+import { contact, isActive, mailLink, nav, tickerItems, waLink } from "@/lib/site";
 import { gsap } from "@/lib/gsap";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const pathname = usePathname();
+
+  // Al cambiar de página se cierra el menú
+  useEffect(() => setOpen(false), [pathname]);
   const menuRef = useRef<HTMLDivElement>(null);
 
   // Fondo sólido al bajar y se esconde al hacer scroll hacia abajo
@@ -70,15 +76,15 @@ export default function Header() {
         </div>
 
         <div className="header-bar container">
-          <a href="#inicio" className="header-logo" aria-label="TSL México, inicio">
+          <Link href="/" className="header-logo" aria-label="TSL México, inicio">
             <Logo />
-          </a>
+          </Link>
 
           <nav className="header-nav" aria-label="Principal">
-            {nav.slice(1, 5).map((l) => (
-              <a key={l.href} href={l.href}>
+            {nav.slice(1).map((l) => (
+              <Link key={l.href} href={l.href} className={isActive(pathname, l.href) ? "is-active" : undefined}>
                 {l.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -107,12 +113,18 @@ export default function Header() {
         <div className="container menu-inner">
           <nav className="menu-links" aria-label="Menú">
             {nav.map((l, i) => (
-              <a key={l.href} href={l.href} className="menu-link" onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`menu-link${isActive(pathname, l.href) ? " is-active" : ""}`}
+                onClick={() => setOpen(false)}
+                tabIndex={open ? 0 : -1}
+              >
                 <span>
                   <em>{String(i + 1).padStart(2, "0")}</em>
                   {l.label}
                 </span>
-              </a>
+              </Link>
             ))}
           </nav>
           <div className="menu-foot">

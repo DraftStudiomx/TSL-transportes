@@ -17,13 +17,16 @@ export const waLink = (msg = "Hola TSL, quiero cotizar un envío.") =>
 export const mailLink = `mailto:${contact.email}?subject=${encodeURIComponent("Cotización TSL")}`;
 
 export const nav = [
-  { label: "Inicio", href: "#inicio" },
-  { label: "Flotilla", href: "#flotilla" },
-  { label: "Cobertura", href: "#cobertura" },
-  { label: "Seguridad", href: "#seguridad" },
-  { label: "Proceso", href: "#proceso" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "Inicio", href: "/" },
+  { label: "Servicios", href: "/servicios/" },
+  { label: "Cobertura", href: "/cobertura/" },
+  { label: "Nosotros", href: "/nosotros/" },
+  { label: "Contacto", href: "/contacto/" },
 ];
+
+/** Marca como activa la página actual (y sus subrutas) en el menú. */
+export const isActive = (pathname: string, href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href.replace(/\/$/, ""));
 
 export const tickerItems = [
   "Cobertura en los 32 estados",
@@ -147,3 +150,157 @@ export const faqs = [
     a: "Escríbenos por WhatsApp o correo con origen, destino, tipo de carga y fecha. Te respondemos el mismo día.",
   },
 ];
+
+// ---------------------------------------------------------------------------
+// Páginas internas (Servicios, Cobertura, Nosotros, Contacto)
+// ---------------------------------------------------------------------------
+
+export const serviceModes = [
+  {
+    tag: "Dedicado",
+    title: "Servicio dedicado",
+    desc: "Una unidad exclusiva para tu carga, de punta a punta, con la ruta y los horarios que tu operación necesita.",
+    points: ["Unidad exclusiva", "Ruta directa", "Ideal para volumen y urgencias"],
+  },
+  {
+    tag: "Consolidado",
+    title: "Servicio consolidado",
+    desc: "Compartes espacio con otras cargas compatibles en rutas optimizadas por región. Pagas solo lo que ocupas.",
+    points: ["Rutas regionales", "Menor costo por envío", "Para envíos de menor volumen"],
+  },
+  {
+    tag: "Frontera",
+    title: "Cruce fronterizo",
+    desc: "Operación en Laredo, TX y Colombia, N.L. con certificación C-TPAT para mover tu carga entre México y Estados Unidos.",
+    points: ["Transfer", "Power Only", "Puerta a puerta"],
+  },
+];
+
+export const crossingServices = [
+  { title: "Transfer", desc: "Movemos tu caja de un lado a otro de la frontera para conectar con el transportista del otro país." },
+  { title: "Power Only", desc: "Ponemos el tractocamión y el operador para mover tu propia caja o remolque." },
+  { title: "Puerta a puerta", desc: "Recolectamos en origen y entregamos en destino, con el cruce incluido en un solo servicio." },
+];
+
+/** Detalle de infraestructura (presentación de ventas TSL). */
+export const basesDetail = [
+  {
+    city: "Querétaro",
+    kind: "Flotilla propia",
+    total: 57,
+    units: [
+      { name: "Cajas 53′", n: 20 },
+      { name: "Torton", n: 10 },
+      { name: "Camioneta 3.5 ton", n: 15 },
+      { name: "Camioneta 1.5 ton", n: 12 },
+    ],
+  },
+  {
+    city: "San Miguel de Allende, Gto.",
+    kind: "Flotilla propia",
+    total: 78,
+    units: [
+      { name: "Cajas 53′", n: 37 },
+      { name: "Torton", n: 25 },
+      { name: "Camioneta 3.5 ton", n: 10 },
+      { name: "Camioneta 1.5 ton", n: 6 },
+    ],
+  },
+];
+
+export const offices = [
+  { city: "Aguascalientes", kind: "Oficina administrativa central", address: "Administración y facturación" },
+  { city: "Puebla", kind: "Aliado comercial", address: "Privada ND 47, Puebla" },
+  { city: "Nuevo Laredo", kind: "Aliado comercial", address: "República de Argentina 1055, Fracc. América 1" },
+];
+
+export const regions = [
+  { name: "Bajío", states: "Querétaro, Guanajuato, Aguascalientes, San Luis Potosí" },
+  { name: "Centro", states: "CDMX, Estado de México, Puebla, Hidalgo, Tlaxcala, Morelos" },
+  { name: "Norte y frontera", states: "Nuevo León, Coahuila, Tamaulipas, Chihuahua, Sonora, Baja California" },
+  { name: "Occidente", states: "Jalisco, Michoacán, Colima, Nayarit, Zacatecas, Durango, Sinaloa" },
+  { name: "Golfo y sureste", states: "Veracruz, Tabasco, Oaxaca, Chiapas, Guerrero" },
+  { name: "Península", states: "Yucatán, Quintana Roo, Campeche, Baja California Sur" },
+];
+
+export const aboutValues = [
+  { title: "Responsabilidad", desc: "Tu carga es nuestra responsabilidad desde que la recolectamos hasta que firmas de recibido." },
+  { title: "Comunicación directa", desc: "Hablas con personas que conocen tu operación, no con un call center." },
+  { title: "Puntualidad", desc: "Programamos con realismo y cumplimos lo que prometemos." },
+  { title: "Seguridad", desc: "Operadores certificados, unidades en condiciones y procesos C-TPAT." },
+];
+
+export const cargoOptions = [
+  "Carga general",
+  "Plásticos",
+  "Metales",
+  "Autopartes",
+  "Grado alimenticio",
+  "Línea blanca",
+  "Maquinaria",
+  "Aeroespacial",
+  "Materias primas",
+  "Otro",
+];
+
+export const unitOptions = ["No sé / que me recomienden", "Caja 53′", "Torton / Rabón", "Refrigerado", "Camioneta 3.5 ton", "Camioneta 1.5 ton", "Plataforma"];
+
+// ---------------------------------------------------------------------------
+// Gente real: espacios reservados hasta recibir fotos y testimonios del cliente.
+// Para publicar una foto: copiarla a /public/img/equipo/ y poner su ruta en `src`.
+// ---------------------------------------------------------------------------
+
+export type Photo = { src?: string; label: string; hint?: string };
+
+export const leader = {
+  photo: { label: "Director / fundador de TSL", hint: "Retrato en oficina o junto a una unidad" } as Photo,
+  quote: "[Frase del director: por qué fundó TSL y qué le promete a cada cliente.]",
+  name: "[Nombre del director]",
+  role: "Director general, TSL México",
+};
+
+export const team: { photo: Photo; name: string; role: string }[] = [
+  { photo: { label: "Asesor/a de ventas" }, name: "[Nombre]", role: "Ventas y cotizaciones" },
+  { photo: { label: "Atención a clientes" }, name: "[Nombre]", role: "Seguimiento de servicios" },
+  { photo: { label: "Coordinador/a de tráfico" }, name: "[Nombre]", role: "Operaciones y rutas" },
+  { photo: { label: "Administración" }, name: "[Nombre]", role: "Facturación" },
+];
+
+export const operationPhotos: Photo[] = [
+  { label: "Operador junto a su unidad", hint: "Con uniforme, mirando a cámara" },
+  { label: "Maniobra de carga en andén" },
+  { label: "Patio con unidades TSL", hint: "Querétaro o San Miguel de Allende" },
+  { label: "Seguimiento en tiempo real", hint: "Persona con pantalla o celular" },
+  { label: "Operadores en revisión de unidad" },
+];
+
+export const basePhotos: Record<string, Photo> = {
+  "Querétaro": { label: "Patio Querétaro" },
+  "San Miguel de Allende, Gto.": { label: "Patio San Miguel de Allende" },
+};
+
+export const testimonials = [
+  {
+    quote: "[Testimonio del cliente: 2 o 3 líneas sobre puntualidad, comunicación o seguimiento de su carga.]",
+    name: "[Nombre del cliente]",
+    role: "[Puesto]",
+    company: "[Empresa]",
+  },
+  {
+    quote: "[Testimonio del cliente: qué problema le resolvió TSL y desde cuándo trabajan juntos.]",
+    name: "[Nombre del cliente]",
+    role: "[Puesto]",
+    company: "[Empresa]",
+  },
+  {
+    quote: "[Testimonio del cliente: experiencia con cruces fronterizos o carga especializada.]",
+    name: "[Nombre del cliente]",
+    role: "[Puesto]",
+    company: "[Empresa]",
+  },
+];
+
+/** Logos de clientes (con permiso). Mientras tanto, espacios reservados. */
+export const clientLogos: { src?: string; name: string }[] = Array.from({ length: 8 }, (_, i) => ({
+  name: `Cliente ${String(i + 1).padStart(2, "0")}`,
+}));

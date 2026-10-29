@@ -1,0 +1,215 @@
+/* ==========================================================================
+   Gente real: espacios de foto, testimonios, logos, equipo y galería.
+   Los espacios reservados se reemplazan por fotos reales al poner `src` en src/lib/site.ts.
+   ========================================================================== */
+.photo-slot {
+  position: relative;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 200px;
+  padding: 24px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1.5px dashed rgba(1, 32, 63, 0.22);
+  background:
+    repeating-linear-gradient(135deg, rgba(1, 32, 63, 0.035) 0 12px, transparent 12px 24px),
+    #dde3e8;
+  color: var(--on-light-dim);
+  text-align: center;
+}
+.section-dark .photo-slot,
+.section-deep .photo-slot {
+  border-color: rgba(230, 234, 237, 0.22);
+  background:
+    repeating-linear-gradient(135deg, rgba(230, 234, 237, 0.04) 0 12px, transparent 12px 24px),
+    #0b2a49;
+  color: var(--on-dark-dim);
+}
+.photo-slot.has-photo { display: block; padding: 0; border: 0; background: none; }
+.photo-slot.has-photo img { width: 100%; height: 100%; object-fit: cover; }
+.ps-ico { width: 34px; height: 34px; opacity: 0.6; }
+.ps-label { font-family: var(--font-display), sans-serif; font-weight: 700; font-size: 15px; color: inherit; }
+.ps-hint { font-size: 13px; opacity: 0.75; max-width: 240px; }
+.ps-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--navy);
+  font-family: var(--font-display), sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Testimonios */
+.testi { padding: clamp(96px, 12vw, 180px) 0 clamp(48px, 6vw, 80px); }
+.testi-nav { display: flex; gap: 10px; }
+.testi-nav button {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--line-light);
+  font-size: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+.testi-nav button:hover { background: var(--navy); color: var(--on-dark); }
+.testi-card {
+  position: relative;
+  display: grid;
+  gap: 40px;
+  margin: 0;
+  padding: clamp(40px, 5vw, 80px);
+  border-radius: var(--radius);
+  background: var(--white);
+}
+.testi-mark {
+  position: absolute;
+  top: 0.05em;
+  right: 0.25em;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: clamp(120px, 14vw, 220px);
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.6;
+}
+.testi-card blockquote {
+  position: relative;
+  max-width: 980px;
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 500;
+  font-size: clamp(22px, 2.6vw, 40px);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--on-light);
+}
+.testi-card figcaption { display: flex; align-items: center; gap: 16px; }
+.testi-card figcaption > span:last-child { display: grid; }
+.testi-card b { font-family: var(--font-display), sans-serif; font-size: 17px; }
+.testi-card small { color: var(--on-light-dim); font-size: 14px; }
+.testi-avatar {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--accent);
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+}
+.testi-dots { display: flex; gap: 8px; margin-top: 24px; }
+.testi-dots button {
+  width: 28px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--line-light);
+  transition: background-color 0.3s, width 0.4s var(--ease-out);
+}
+.testi-dots button.is-active { width: 56px; background: var(--navy); }
+
+/* Logos de clientes */
+.logos { padding: clamp(40px, 5vw, 72px) 0 clamp(80px, 10vw, 140px); overflow: hidden; }
+.logos-track {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.logos-row { display: flex; gap: 16px; width: max-content; animation: marquee 40s linear infinite; }
+.logos-row li { display: grid; place-items: center; width: 200px; height: 96px; }
+.logos-row img { max-width: 160px; max-height: 56px; object-fit: contain; filter: grayscale(1); opacity: 0.7; }
+.logo-slot {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  border: 1.5px dashed rgba(1, 32, 63, 0.2);
+  font-family: var(--font-display), sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--on-light-dim);
+}
+@media (prefers-reduced-motion: reduce) {
+  .logos-row { animation: none; }
+}
+
+/* Director y equipo */
+.people { padding: clamp(80px, 10vw, 160px) 0; }
+.leader {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+  margin-bottom: clamp(100px, 12vw, 180px);
+}
+.leader-copy { display: grid; gap: 28px; }
+.leader-quote {
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(26px, 3vw, 46px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.leader-name { display: grid; }
+.leader-name b { font-family: var(--font-display), sans-serif; font-size: 18px; }
+.leader-name span { color: var(--on-light-dim); }
+.team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.member { display: grid; gap: 6px; }
+.member .photo-slot { margin-bottom: 12px; }
+.member b { font-family: var(--font-display), sans-serif; font-size: 18px; }
+.member > span { color: var(--on-light-dim); font-size: 15px; }
+
+/* Galería de operación */
+.gallery { padding: clamp(96px, 12vw, 180px) 0; overflow: hidden; }
+.gallery-lead { color: var(--on-dark-dim); }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "a b c"
+    "a d c"
+    "e e e";
+  grid-auto-rows: 220px;
+  gap: 20px;
+}
+.gallery-item .photo-slot { height: 100%; }
+.gi-1 { grid-area: a; }
+.gi-2 { grid-area: b; }
+.gi-3 { grid-area: c; }
+.gi-4 { grid-area: d; }
+.gi-5 { grid-area: e; }
+
+/* Foto de patio en las bases */
+.base-photo { margin-bottom: 28px; min-height: 0; }
+
+@media (max-width: 899px) {
+  .leader { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "a b"
+      "a d"
+      "c c"
+      "e e";
+    grid-auto-rows: 170px;
+    gap: 12px;
+  }
+  .testi-nav { display: none; }
+  .testi-card { padding-top: 72px; }
+  .testi-mark { font-size: 96px; top: 0.1em; right: auto; left: 0.3em; }
+  .logos-row li { width: 150px; height: 76px; }
+}

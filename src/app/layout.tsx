@@ -1,7 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, DM_Sans } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import MobileCta from "@/components/MobileCta";
 import "./globals.css";
+import "./pages.css";
+import "./people.css";
 
 const display = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -18,7 +23,10 @@ const body = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "TSL México | Transporte terrestre nacional e internacional",
+  title: {
+    default: "TSL México | Transporte terrestre nacional e internacional",
+    template: "%s | TSL México",
+  },
   description:
     "Transportes y Soluciones Logísticas: 15 años moviendo carga en los 32 estados de México, con cruces a Laredo TX, certificación C-TPAT y seguimiento real 24/7.",
   metadataBase: new URL("https://tslmexico.com"),
@@ -44,7 +52,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <SmoothScroll />
-        {children}
+        <Header />
+        <main>{children}</main>
+        <Footer />
+        <MobileCta />
       </body>
     </html>
   );

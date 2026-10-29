@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { gsap, MQ, splitWords, useGsap } from "@/lib/gsap";
 import { problems, stats } from "@/lib/site";
 import { ArrowIcon } from "./Icons";
@@ -78,9 +79,9 @@ export default function Intro() {
               Sin intermediarios que desaparecen. Sin respuestas genéricas. Solo personas con experiencia que
               entienden tu operación.
             </p>
-            <a href="#seguridad" className="link-arrow">
+            <Link href="/nosotros/" className="link-arrow">
               Conoce por qué confían en nosotros <ArrowIcon className="ico" />
-            </a>
+            </Link>
           </div>
 
         </div>

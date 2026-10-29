@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
@@ -12,6 +13,16 @@ declare global {
 
 /** Scroll suave (Lenis) sincronizado con ScrollTrigger. Se desactiva con reduced-motion. */
 export default function SmoothScroll() {
+  const pathname = usePathname();
+
+  // Cada página nueva arranca arriba y ScrollTrigger recalcula posiciones
+  useEffect(() => {
+    window.__lenis?.scrollTo(0, { immediate: true, force: true });
+    window.scrollTo(0, 0);
+    const id = requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => cancelAnimationFrame(id);
+  }, [pathname]);
+
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 

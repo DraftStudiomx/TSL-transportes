@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { gsap, MQ, splitWords, useGsap } from "@/lib/gsap";
 import { bases, contact, mailLink, nav, waLink } from "@/lib/site";
 import { LogoMark } from "./Logo";
@@ -8,6 +10,8 @@ import { MailIcon, PhoneIcon, WhatsAppIcon } from "./Icons";
 
 export default function Footer() {
   const ref = useRef<HTMLElement>(null);
+  // En la página de contacto el formulario ya es el llamado a la acción
+  const showCta = !usePathname().startsWith("/contacto");
 
   useGsap(ref, (mm) => {
     mm.add(MQ.motion, () => {
@@ -31,8 +35,9 @@ export default function Footer() {
   });
 
   return (
-    <footer id="contacto" ref={ref} className="footer section-deep">
-      <div className="container cta">
+    <footer id="cierre" ref={ref} className={`footer section-deep${showCta ? "" : " no-cta"}`}>
+      {showCta && (
+        <div className="container cta">
         <p className="label label-accent">Hablemos</p>
         <h2 className="cta-title display-1">{splitWords("¿Listo para mover tu carga?")}</h2>
         <div className="cta-row">
@@ -47,6 +52,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      )}
 
       <div className="container footer-cols">
         <div>
@@ -54,7 +60,7 @@ export default function Footer() {
           <ul>
             {nav.map((l) => (
               <li key={l.href}>
-                <a href={l.href}>{l.label}</a>
+                <Link href={l.href}>{l.label}</Link>
               </li>
             ))}
           </ul>

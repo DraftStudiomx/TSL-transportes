@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Intro from "@/components/Intro";
+import PhotoBand from "@/components/PhotoBand";
 import Fleet from "@/components/Fleet";
 import Coverage from "@/components/Coverage";
 import Safety from "@/components/Safety";
@@ -17,6 +18,7 @@ export default function Home() {
       <main>
         <Hero />
         <Intro />
+        <PhotoBand />
         <Fleet />
         <Coverage />
         <Safety />

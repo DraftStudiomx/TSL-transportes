@@ -23,6 +23,7 @@ export default function Fleet() {
       if (truck) gsap.set(truck, { xPercent: -75 * (1 - d) ** 2 + 5 * cruise });
       if (speedo) speedo.textContent = String(Math.round(MAX_SPEED * Math.sqrt(d))).padStart(2, "0");
     };
+    render(0); // arranca fuera de cuadro desde el primer pintado
 
     mm.add(MQ.desktop, () => {
       const tl = gsap.timeline({
@@ -33,6 +34,8 @@ export default function Fleet() {
           end: "+=220%",
           pin: true,
           scrub: 0.6,
+          // También al calcular posiciones, para que el camión arranque fuera de cuadro y no "brinque"
+          onRefresh: (st) => render(st.progress / DRIVE_END, Math.max(0, (st.progress - DRIVE_END) / (1 - DRIVE_END))),
           onUpdate: (st) => {
             render(st.progress / DRIVE_END, Math.max(0, (st.progress - DRIVE_END) / (1 - DRIVE_END)));
             // Cada unidad ocupa la misma fracción del recorrido
@@ -57,6 +60,7 @@ export default function Fleet() {
             start: "top 85%",
             end: "bottom 35%",
             scrub: true,
+            onRefresh: (st) => render(st.progress),
             onUpdate: (st) => render(st.progress),
           },
         }
@@ -75,7 +79,7 @@ export default function Fleet() {
           <div className="fleet-glow" />
           <div className="fleet-truck">
             <span className="truck-shadow" />
-            <img src={asset("/img/truck-tsl.webp")} srcSet={`${asset("/img/truck-tsl-sm.webp")} 900w, ${asset("/img/truck-tsl.webp")} 1708w`} sizes="(max-width: 899px) 100vw, 64vw" alt="" />
+            <img src={asset("/img/truck-side.webp")} srcSet={`${asset("/img/truck-side-sm.webp")} 800w, ${asset("/img/truck-side.webp")} 1274w`} sizes="(max-width: 899px) 100vw, 76vw" alt="" />
           </div>
         </div>
 

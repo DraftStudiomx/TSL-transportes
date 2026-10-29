@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { gsap, MQ, splitWords, useGsap } from "@/lib/gsap";
-import { asset, problems, stats } from "@/lib/site";
+import { problems, stats } from "@/lib/site";
 import { ArrowIcon } from "./Icons";
 
 export default function Intro() {
@@ -22,16 +22,6 @@ export default function Intro() {
         }
       );
 
-      gsap.fromTo(
-        ".intro-thumb",
-        { clipPath: "inset(0 100% 0 0)" },
-        {
-          clipPath: "inset(0 0% 0 0)",
-          duration: 1.4,
-          ease: "expo.inOut",
-          scrollTrigger: { trigger: ".intro-thumb", start: "top 85%" },
-        }
-      );
 
       // Problemas: cada uno se resalta con un marcador conforme haces scroll y aparece la respuesta de TSL
       const rows = gsap.utils.toArray<HTMLElement>(".problem");
@@ -74,14 +64,11 @@ export default function Intro() {
     <section ref={ref} className="intro section-light">
       <div className="container">
         <div className="intro-grid">
-          <div className="intro-left">
-            <img className="intro-thumb" src={asset("/img/intro-aerial.jpg")} alt="" aria-hidden="true" />
-            <h2 className="intro-title display-2">
-              <span className="muted">{splitWords("Movemos tu carga.")}</span>
-              <br />
-              {splitWords("Respondemos por ella.")}
-            </h2>
-          </div>
+          <h2 className="intro-title display-2">
+            <span className="muted">{splitWords("Movemos tu carga.")}</span>
+            <br />
+            {splitWords("Respondemos por ella.")}
+          </h2>
           <div className="intro-right">
             <p className="intro-lead">
               Con 15 años en el camino, TSL mueve carga general y especializada en los 32 estados de México y
@@ -95,6 +82,7 @@ export default function Intro() {
               Conoce por qué confían en nosotros <ArrowIcon className="ico" />
             </a>
           </div>
+
         </div>
 
         <div className="problems">

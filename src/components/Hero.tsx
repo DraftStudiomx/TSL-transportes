@@ -10,8 +10,9 @@ const hotspots = [
   {
     id: "carga",
     label: "Carga",
-    x: 49,
-    y: 32,
+    x: 31,
+    y: 26,
+    open: "down",
     title: "Tipos de carga",
     desc: "Lo que transportamos todos los días, a nivel nacional:",
     chips: ["Plásticos", "Metales", "Autopartes", "Grado alimenticio", "Línea blanca", "Maquinaria"],
@@ -20,8 +21,9 @@ const hotspots = [
   {
     id: "cabina",
     label: "Cabina",
-    x: 87,
-    y: 39,
+    x: 70,
+    y: 35,
+    open: "down",
     title: "Cabina y seguridad",
     desc: "Choferes con licencia tipo B, examen médico y antidoping vigentes. Certificación C-TPAT para cruces a Estados Unidos.",
     chips: [],
@@ -30,8 +32,9 @@ const hotspots = [
   {
     id: "chasis",
     label: "Chasís",
-    x: 41,
-    y: 80,
+    x: 44,
+    y: 75,
+    open: "up",
     title: "Tipos de unidad",
     desc: "La unidad correcta para cada operación:",
     chips: ["Cajas 53′", "Torton / Rabón", "Refrigerados", "3.5 / 1.5 ton", "Plataformas", "Vehículos"],
@@ -78,7 +81,7 @@ export default function Hero() {
   const current = hotspots.find((h) => h.id === active);
 
   return (
-    <section id="inicio" ref={ref} className="hero" onClick={(e) => !(e.target as HTMLElement).closest(".hs") && setActive(null)}>
+    <section id="inicio" ref={ref} className={`hero${active ? " has-active-hs" : ""}`} onClick={(e) => !(e.target as HTMLElement).closest(".hs") && setActive(null)}>
       <div className="hero-top container">
         <p className="eyebrow" data-hero-in>
           <span className="rule" aria-hidden="true" /> Transportes y Soluciones Logísticas
@@ -104,15 +107,15 @@ export default function Hero() {
           <img
             className="hero-photo"
             src={asset("/img/truck-tsl.webp")}
-            srcSet={`${asset("/img/truck-tsl-sm.webp")} 900w, ${asset("/img/truck-tsl.webp")} 1708w`}
+            srcSet={`${asset("/img/truck-tsl-sm.webp")} 800w, ${asset("/img/truck-tsl.webp")} 1280w`}
             sizes="(max-width: 899px) 100vw, 60vw"
-            alt="Camión de TSL México"
+            alt="Tractocamión de TSL México con caja de 53 pies"
             fetchPriority="high"
           />
           {hotspots.map((h) => (
             <button
               key={h.id}
-              className={`hs${active === h.id ? " is-active" : ""}`}
+              className={`hs hs-open-${h.open}${active === h.id ? " is-active" : ""}`}
               style={{ left: `${h.x}%`, top: `${h.y}%` }}
               onClick={() => setActive((a) => (a === h.id ? null : h.id))}
               onMouseEnter={() => window.matchMedia("(hover: hover)").matches && setActive(h.id)}

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { gsap, MQ, splitWords, useGsap } from "@/lib/gsap";
 import { bases, contact, mailLink, nav, waLink } from "@/lib/site";
 import { LogoMark } from "./Logo";
+import DraftCredit from "./DraftCredit";
 import { MailIcon, PhoneIcon, WhatsAppIcon } from "./Icons";
 
 export default function Footer() {
@@ -103,13 +104,11 @@ export default function Footer() {
       </div>
 
       <div className="container footer-bottom">
-        <span>© {new Date().getFullYear()} TSL México · Transportes y Soluciones Logísticas</span>
         <span>
-          Diseño y desarrollo por{" "}
-          <a href="https://draftstudio.mx" target="_blank" rel="noopener">
-            Draft Studio
-          </a>
+          © {new Date().getFullYear()} TSL México · Transportes y Soluciones Logísticas ·{" "}
+          <Link href="/aviso-de-privacidad/">Aviso de privacidad</Link>
         </span>
+        <DraftCredit />
       </div>
     </footer>
   );

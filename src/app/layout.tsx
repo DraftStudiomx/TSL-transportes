@@ -7,6 +7,7 @@ import MobileCta from "@/components/MobileCta";
 import "./globals.css";
 import "./pages.css";
 import "./people.css";
+import "./legal.css";
 
 const display = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -30,6 +31,9 @@ export const metadata: Metadata = {
   description:
     "Transportes y Soluciones Logísticas: 15 años moviendo carga en los 32 estados de México, con cruces a Laredo TX, certificación C-TPAT y seguimiento real 24/7.",
   metadataBase: new URL("https://tslmexico.com"),
+  authors: [{ name: "Draft Studio", url: "https://draftstudio.mx" }],
+  creator: "Draft Studio",
+  publisher: "TSL México",
   openGraph: {
     title: "TSL México — Tu carga, nuestra responsabilidad.",
     description: "Transporte terrestre nacional e internacional con cobertura en los 32 estados.",

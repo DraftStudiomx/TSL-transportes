@@ -304,3 +304,14 @@ export const testimonials = [
 export const clientLogos: { src?: string; name: string }[] = Array.from({ length: 8 }, (_, i) => ({
   name: `Cliente ${String(i + 1).padStart(2, "0")}`,
 }));
+
+// ---------------------------------------------------------------------------
+// Datos legales para el Aviso de privacidad. Confirmar con TSL / su abogado.
+// ---------------------------------------------------------------------------
+export const legal = {
+  company: "[Razón social de TSL]",
+  brand: "TSL México (Transportes y Soluciones Logísticas)",
+  address: "[Domicilio fiscal completo, Aguascalientes]",
+  privacyEmail: "[correo para privacidad, p. ej. privacidad@tslmexico.com]",
+  updated: "29 de octubre de 2026",
+};

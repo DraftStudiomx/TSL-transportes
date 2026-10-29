@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
+import Link from "next/link";
 import { asset, cargoOptions, unitOptions, waLink } from "@/lib/site";
 import { MailIcon, WhatsAppIcon } from "../Icons";
 
@@ -162,7 +163,10 @@ export default function ContactForm() {
           <MailIcon className="ico" /> {status === "sending" ? "Enviando…" : "Enviar por correo"}
         </button>
       </div>
-      <p className="form-note">Te respondemos el mismo día. Tus datos solo se usan para atender tu cotización.</p>
+      <p className="form-note">
+        Te respondemos el mismo día. TSL México usa tus datos para atender tu cotización y prestar el servicio. Consulta el{" "}
+        <Link href="/aviso-de-privacidad/">aviso de privacidad</Link>.
+      </p>
     </form>
   );
 }

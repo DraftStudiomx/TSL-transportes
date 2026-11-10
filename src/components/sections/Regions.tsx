@@ -2,10 +2,11 @@
 
 import { useRef } from "react";
 import { gsap, MQ, useGsap } from "@/lib/gsap";
-import { regions } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 
 /** Rutas optimizadas por región. */
 export default function Regions() {
+  const { regions } = useContent();
   const ref = useRef<HTMLElement>(null);
 
   useGsap(ref, (mm) => {

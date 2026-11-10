@@ -2,10 +2,11 @@
 
 import { useRef } from "react";
 import { gsap, MQ, splitWords, useGsap } from "@/lib/gsap";
-import { aboutValues, stats } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 
 /** Historia de TSL, cifras clave y valores. */
 export default function About() {
+  const { aboutValues, stats, texts } = useContent();
   const ref = useRef<HTMLElement>(null);
 
   useGsap(ref, (mm) => {
@@ -34,18 +35,12 @@ export default function About() {
         <div className="about-grid">
           <p className="label">Nuestra historia</p>
           <h2 className="about-quote display-2">
-            {splitWords("Nacimos para resolver lo que ya conoces.")}
+            {splitWords(texts.aboutQuote)}
           </h2>
           <div className="about-copy">
-            <p>
-              Retrasos que frenan tu producción, carga sin rastro y proveedores que desaparecen después de la cotización. TSL,
-              Transportes y Soluciones Logísticas, lleva 15 años moviendo carga por todo México con una idea simple: que cada
-              cliente sepa dónde está su carga y quién responde por ella.
-            </p>
-            <p>
-              Hoy operamos 135 unidades desde Querétaro y San Miguel de Allende, con oficina central en Aguascalientes, aliados
-              en Puebla y Nuevo Laredo, y cruces a Estados Unidos con certificación C-TPAT.
-            </p>
+            {texts.aboutParagraphs.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
           </div>
         </div>
 

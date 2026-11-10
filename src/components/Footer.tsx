@@ -4,12 +4,14 @@ import { useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { gsap, MQ, splitWords, useGsap } from "@/lib/gsap";
-import { bases, contact, mailLink, nav, waLink } from "@/lib/site";
+import { nav } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 import { LogoMark } from "./Logo";
 import DraftCredit from "./DraftCredit";
 import { MailIcon, PhoneIcon, WhatsAppIcon } from "./Icons";
 
 export default function Footer() {
+  const { bases, contact, mailLink, waLink } = useContent();
   const ref = useRef<HTMLElement>(null);
   // En la página de contacto el formulario ya es el llamado a la acción
   const showCta = !usePathname().startsWith("/contacto");

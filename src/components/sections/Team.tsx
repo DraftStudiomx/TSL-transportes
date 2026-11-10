@@ -2,11 +2,12 @@
 
 import { useRef } from "react";
 import { gsap, MQ, useGsap } from "@/lib/gsap";
-import { leader, team } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 import PhotoSlot from "../PhotoSlot";
 
 /** Director con su mensaje y el equipo que atiende a los clientes. */
 export default function Team() {
+  const { leader, team } = useContent();
   const ref = useRef<HTMLElement>(null);
 
   useGsap(ref, (mm) => {

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
+import { getContent } from "@/lib/content";
 import ServiceModes from "@/components/sections/ServiceModes";
 import Fleet from "@/components/Fleet";
 import Gallery from "@/components/sections/Gallery";
+import UnitPhotos from "@/components/sections/UnitPhotos";
 import Cargo from "@/components/Cargo";
 import Cycle from "@/components/Cycle";
 import Faq from "@/components/Faq";
@@ -14,14 +16,17 @@ export const metadata: Metadata = {
     "Transporte terrestre dedicado, consolidado y con cruce fronterizo. Cajas 53′, torton, refrigerados, plataformas y camionetas para carga general y especializada.",
 };
 
-export default function ServiciosPage() {
+export default async function ServiciosPage() {
+  const { texts } = await getContent();
+  const hero = texts.heroServicios;
+
   return (
     <>
       <PageHero
         label="Servicios"
-        lines={["Transporte", "terrestre para", "cualquier necesidad."]}
-        accentLine={2}
-        lead="Carga general y especializada en los 32 estados, con la unidad correcta para cada operación y un equipo que responde por ella."
+        lines={hero.lines}
+        accentLine={hero.accentLine}
+        lead={hero.lead}
         media={
           <img
             className="ph-truck"
@@ -34,6 +39,7 @@ export default function ServiciosPage() {
       />
       <ServiceModes />
       <Fleet />
+      <UnitPhotos />
       <Gallery />
       <Cargo />
       <Cycle />

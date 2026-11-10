@@ -3,10 +3,11 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { gsap, MQ, splitWords, useGsap } from "@/lib/gsap";
-import { problems, stats } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 import { ArrowIcon } from "./Icons";
 
 export default function Intro() {
+  const { problems, stats, texts } = useContent();
   const ref = useRef<HTMLElement>(null);
 
   useGsap(ref, (mm) => {
@@ -71,14 +72,8 @@ export default function Intro() {
             {splitWords("Respondemos por ella.")}
           </h2>
           <div className="intro-right">
-            <p className="intro-lead">
-              Con 15 años en el camino, TSL mueve carga general y especializada en los 32 estados de México y
-              cruza la frontera con Estados Unidos, con un equipo asignado que responde desde la recolección hasta la entrega.
-            </p>
-            <p className="intro-lead dim">
-              Sin intermediarios que desaparecen. Sin respuestas genéricas. Solo personas con experiencia que
-              entienden tu operación.
-            </p>
+            <p className="intro-lead">{texts.introLead}</p>
+            <p className="intro-lead dim">{texts.introLeadDim}</p>
             <Link href="/nosotros/" className="link-arrow">
               Conoce por qué confían en nosotros <ArrowIcon className="ico" />
             </Link>

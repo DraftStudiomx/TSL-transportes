@@ -2,10 +2,11 @@
 
 import { useRef } from "react";
 import { gsap, MQ, useGsap } from "@/lib/gsap";
-import { crossingServices, crossings } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 
 /** Cruces fronterizos: ciudades y los tres servicios de frontera. */
 export default function Crossings() {
+  const { crossingServices, crossings } = useContent();
   const ref = useRef<HTMLElement>(null);
 
   useGsap(ref, (mm) => {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
+import { getContent } from "@/lib/content";
 import Coverage from "@/components/Coverage";
 import Bases from "@/components/sections/Bases";
 import Crossings from "@/components/sections/Crossings";
@@ -11,14 +12,17 @@ export const metadata: Metadata = {
     "Cobertura en los 32 estados de México, cruces fronterizos en Laredo TX y Colombia N.L., flotilla en Querétaro y San Miguel de Allende y oficina central en Aguascalientes.",
 };
 
-export default function CoberturaPage() {
+export default async function CoberturaPage() {
+  const { texts } = await getContent();
+  const hero = texts.heroCobertura;
+
   return (
     <>
       <PageHero
         label="Cobertura"
-        lines={["32 estados.", "Dos fronteras.", "Un solo equipo."]}
-        accentLine={1}
-        lead="Flotilla propia en el Bajío, aliados en Puebla y Nuevo Laredo, y cruces a Estados Unidos por Laredo, TX y Colombia, N.L."
+        lines={hero.lines}
+        accentLine={hero.accentLine}
+        lead={hero.lead}
       />
       <Coverage />
       <Bases />

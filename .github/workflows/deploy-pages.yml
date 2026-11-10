@@ -1,4 +1,4 @@
-# Publica una vista previa del sitio en GitHub Pages en cada push a main.
+# Publica una vista previa del sitio en GitHub Pages en cada push a main y cada vez que se publica en Sanity.
 # Requiere Settings → Pages → Source: "GitHub Actions".
 name: Deploy a GitHub Pages
 
@@ -6,6 +6,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Sanity avisa por webhook cuando el cliente publica contenido
+  repository_dispatch:
+    types: [sanity-publish]
 
 permissions:
   contents: read

@@ -2,11 +2,12 @@
 
 import { useRef } from "react";
 import { gsap, MQ, useGsap } from "@/lib/gsap";
-import { basePhotos, basesDetail, offices } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 import PhotoSlot from "../PhotoSlot";
 
 /** Infraestructura: flotilla por base (barras proporcionales) y oficinas / aliados. */
 export default function Bases() {
+  const { basesDetail, offices } = useContent();
   const ref = useRef<HTMLElement>(null);
   const max = Math.max(...basesDetail.flatMap((b) => b.units.map((u) => u.n)));
 
@@ -35,14 +36,15 @@ export default function Bases() {
         <div className="sec-head">
           <p className="label">Infraestructura</p>
           <h2 className="display-2">
-            135 unidades <span className="muted">en dos bases propias.</span>
+            {basesDetail.reduce((n, b) => n + b.total, 0)} unidades{" "}
+            <span className="muted">en {basesDetail.length === 2 ? "dos" : basesDetail.length} bases propias.</span>
           </h2>
         </div>
 
         <div className="bases-grid">
           {basesDetail.map((b) => (
             <article key={b.city} className="base">
-              {basePhotos[b.city] && <PhotoSlot photo={basePhotos[b.city]} className="base-photo" ratio="16 / 9" />}
+              <PhotoSlot photo={b.photo} className="base-photo" ratio="16 / 9" />
               <header>
                 <span className="base-kind">{b.kind}</span>
                 <h3>{b.city}</h3>

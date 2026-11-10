@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { faqs, mailLink } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 import { PlusIcon } from "./Icons";
 
 export default function Faq() {
+  const { faqs, mailLink } = useContent();
   const [open, setOpen] = useState<number | null>(0);
 
   return (

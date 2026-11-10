@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { waLink } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 import { WhatsAppIcon } from "./Icons";
 
 /** Botón flotante de WhatsApp en mobile: aparece después del hero y se oculta en el footer. */
 export default function MobileCta() {
+  const { waLink } = useContent();
   const [show, setShow] = useState(false);
   const onContact = usePathname().startsWith("/contacto");
 

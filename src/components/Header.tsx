@@ -5,10 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
 import { WhatsAppIcon } from "./Icons";
-import { contact, isActive, mailLink, nav, tickerItems, waLink } from "@/lib/site";
+import { isActive, nav } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 import { gsap } from "@/lib/gsap";
 
 export default function Header() {
+  const { contact, mailLink, tickerItems, waLink } = useContent();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);

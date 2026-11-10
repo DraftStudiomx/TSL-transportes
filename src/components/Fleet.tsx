@@ -2,13 +2,15 @@
 
 import { useRef, useState } from "react";
 import { gsap, MQ, stackCards, useGsap } from "@/lib/gsap";
-import { asset, units } from "@/lib/site";
+import { asset } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 
 const MAX_SPEED = 88;
 // Parte del recorrido fijado en la que el camión entra y acelera; después sigue en crucero
 const DRIVE_END = 0.45;
 
 export default function Fleet() {
+  const { units } = useContent();
   const ref = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
   const activeRef = useRef(0);

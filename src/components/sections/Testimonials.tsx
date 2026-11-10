@@ -2,10 +2,11 @@
 
 import { useRef, useState } from "react";
 import { gsap, MQ, useGsap } from "@/lib/gsap";
-import { testimonials } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 
 /** Testimonios de clientes: uno grande a la vez, con navegación por puntos. */
 export default function Testimonials() {
+  const { testimonials } = useContent();
   const ref = useRef<HTMLElement>(null);
   const [i, setI] = useState(0);
   const t = testimonials[i];

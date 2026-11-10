@@ -2,7 +2,8 @@
 
 import { useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
-import { asset, cargoOptions, unitOptions, waLink } from "@/lib/site";
+import { asset, cargoOptions, unitOptions } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 import { MailIcon, WhatsAppIcon } from "../Icons";
 
 type Status = "idle" | "sending" | "ok" | "error";
@@ -28,6 +29,7 @@ function summary(data: FormData) {
 }
 
 export default function ContactForm() {
+  const { waLink } = useContent();
   const formRef = useRef<HTMLFormElement>(null);
   const startedAt = useRef(Date.now());
   const [status, setStatus] = useState<Status>("idle");

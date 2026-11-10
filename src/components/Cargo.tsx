@@ -2,9 +2,10 @@
 
 import { useRef } from "react";
 import { gsap, MQ, ScrollTrigger, useGsap } from "@/lib/gsap";
-import { cargo } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 
 export default function Cargo() {
+  const { cargo } = useContent();
   const ref = useRef<HTMLElement>(null);
 
   useGsap(ref, (mm) => {

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
-import { contact, legal } from "@/lib/site";
+import { getContent } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Aviso de privacidad",
@@ -19,7 +19,9 @@ const sections = [
   { id: "cambios", title: "Cambios a este aviso" },
 ];
 
-export default function AvisoPrivacidadPage() {
+export default async function AvisoPrivacidadPage() {
+  const { contact, legal } = await getContent();
+
   return (
     <>
       <PageHero

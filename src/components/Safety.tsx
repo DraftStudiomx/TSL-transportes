@@ -2,12 +2,15 @@
 
 import { useRef } from "react";
 import { gsap, MQ, stackCards, useGsap } from "@/lib/gsap";
-import { asset, differentiators, safety, waLink } from "@/lib/site";
+import { asset } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 import { WhatsAppIcon } from "./Icons";
+import PhotoSlot from "./PhotoSlot";
 
 const teamPoints = ["Grupo exclusivo de WhatsApp por servicio", "Seguimiento real 24/7", "Respuesta el mismo día"];
 
 export default function Safety() {
+  const { differentiators, safety, waLink, advisor } = useContent();
   const ref = useRef<HTMLElement>(null);
 
   useGsap(ref, (mm) => {
@@ -67,7 +70,7 @@ export default function Safety() {
 
       <div className="container team">
         <figure className="team-photo">
-          <img src={asset("/img/asesora.jpg")} alt="Asesora de TSL México atendiendo un servicio" loading="lazy" />
+          {advisor.src ? <img src={asset(advisor.src)} alt={advisor.label} loading="lazy" /> : <PhotoSlot photo={advisor} ratio="4 / 5" />}
           <figcaption>
             <span className="dot" aria-hidden="true" /> Tu asesora, en línea
           </figcaption>

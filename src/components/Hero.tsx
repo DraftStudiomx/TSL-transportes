@@ -2,7 +2,8 @@
 
 import { useRef, useState } from "react";
 import { gsap, MQ, useGsap } from "@/lib/gsap";
-import { asset, mailLink, waLink } from "@/lib/site";
+import { asset } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 import { MailIcon, WhatsAppIcon } from "./Icons";
 
 // Puntos interactivos sobre la foto (hero validado con el cliente). x/y en % de la imagen.
@@ -49,6 +50,7 @@ const heroStats = [
 ];
 
 export default function Hero() {
+  const { mailLink, waLink, texts } = useContent();
   const ref = useRef<HTMLElement>(null);
   const [active, setActive] = useState<string | null>(null);
 
@@ -171,7 +173,7 @@ export default function Hero() {
       <div className="hero-bottom container">
         <div className="hero-copy">
           <p className="lede" data-hero-in>
-            Transporte terrestre nacional e internacional con seguimiento real y cobertura en los 32 estados de México.
+            {texts.heroLede}
           </p>
           <div className="btn-row" data-hero-in>
             <a className="btn btn-accent" href={waLink()} target="_blank" rel="noopener">

@@ -1,7 +1,11 @@
-import { asset, clientLogos } from "@/lib/site";
+"use client";
+
+import { asset } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 
 /** Franja de logos de clientes en movimiento continuo. */
 export default function ClientLogos() {
+  const { clientLogos } = useContent();
   const row = [...clientLogos, ...clientLogos];
   return (
     <section className="logos section-light" aria-label="Empresas que confían en TSL">

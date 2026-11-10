@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, DM_Sans } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
+import { ContentProvider } from "@/components/ContentProvider";
+import { getContent } from "@/lib/content";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileCta from "@/components/MobileCta";
@@ -47,7 +49,10 @@ export const viewport: Viewport = {
   themeColor: "#01203f",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Contenido de Sanity (se lee una vez al construir el sitio)
+  const content = await getContent();
+
   return (
     <html lang="es-MX" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
       <head>
@@ -55,11 +60,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body>
-        <SmoothScroll />
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <MobileCta />
+        <ContentProvider content={content}>
+          <SmoothScroll />
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <MobileCta />
+        </ContentProvider>
       </body>
     </html>
   );

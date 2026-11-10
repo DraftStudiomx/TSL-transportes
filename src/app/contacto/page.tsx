@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
+import { getContent } from "@/lib/content";
 import ContactForm from "@/components/sections/ContactForm";
 import Faq from "@/components/Faq";
 import { MailIcon, PhoneIcon, WhatsAppIcon } from "@/components/Icons";
-import { bases, contact, mailLink, waLink } from "@/lib/site";
+import { linksFor } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -11,14 +12,18 @@ export const metadata: Metadata = {
     "Cotiza tu envío con TSL México por WhatsApp, correo o teléfono. Te respondemos el mismo día.",
 };
 
-export default function ContactoPage() {
+export default async function ContactoPage() {
+  const { texts, bases, contact } = await getContent();
+  const { waLink, mailLink } = linksFor(contact);
+  const hero = texts.heroContacto;
+
   return (
     <>
       <PageHero
         label="Contacto"
-        lines={["Cotiza", "tu envío."]}
-        accentLine={1}
-        lead="Cuéntanos origen, destino y tipo de carga. Un asesor de TSL te responde el mismo día."
+        lines={hero.lines}
+        accentLine={hero.accentLine}
+        lead={hero.lead}
       />
 
       <section className="contact section-light">

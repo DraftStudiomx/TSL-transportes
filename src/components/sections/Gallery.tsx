@@ -2,11 +2,12 @@
 
 import { useRef } from "react";
 import { gsap, MQ, useGsap } from "@/lib/gsap";
-import { operationPhotos } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 import PhotoSlot from "../PhotoSlot";
 
 /** Galería "TSL en operación": operadores, maniobras, patio y seguimiento. */
 export default function Gallery() {
+  const { operationPhotos } = useContent();
   const ref = useRef<HTMLElement>(null);
 
   useGsap(ref, (mm) => {

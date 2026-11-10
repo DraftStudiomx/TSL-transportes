@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import map from "@/data/mexico-map.json";
 import { gsap, MQ, useGsap } from "@/lib/gsap";
-import { bases, crossings } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 
 type City = { name: string; x: number; y: number; kind: string };
 const cities = map.cities as Record<string, City>;
@@ -39,6 +39,7 @@ const labelPos: Record<string, { x: number; y: number; anchor: "start" | "end" }
 };
 
 export default function Coverage() {
+  const { bases, crossings } = useContent();
   const ref = useRef<HTMLElement>(null);
 
   useGsap(ref, (mm) => {

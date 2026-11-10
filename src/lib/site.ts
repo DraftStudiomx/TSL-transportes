@@ -1,7 +1,7 @@
 // Contenido de la página principal. Cuando entre Sanity, estos datos se moverán al CMS.
 
 /** Antepone el basePath (p. ej. /TSL-transportes en GitHub Pages) a rutas de /public. */
-export const asset = (path: string) => `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
+export const asset = (path: string) => (/^https?:\/\//.test(path) ? path : `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`);
 
 export const contact = {
   whatsapp: "524151223039",
@@ -268,15 +268,23 @@ export const team: { photo: Photo; name: string; role: string }[] = [
 
 export const operationPhotos: Photo[] = [
   { label: "Operador junto a su unidad", hint: "Con uniforme, mirando a cámara" },
-  { label: "Maniobra de carga en andén" },
-  { label: "Patio con unidades TSL", hint: "Querétaro o San Miguel de Allende" },
+  { src: "/img/flota/salida-nocturna.jpg", label: "Unidad TSL lista para salir de noche" },
+  { src: "/img/flota/patio-unidades.jpg", label: "Patio con unidades TSL" },
   { label: "Seguimiento en tiempo real", hint: "Persona con pantalla o celular" },
-  { label: "Operadores en revisión de unidad" },
+  { src: "/img/flota/noche-frontal.jpg", label: "Operación nocturna en ruta" },
+];
+
+/** Fotos reales por tipo de unidad (Servicios). Sin `src` se muestra como foto pendiente. */
+export const unitPhotos: (Photo & { unit: string })[] = [
+  { unit: "Tractocamión con caja 53′", src: "/img/flota/caja-53.jpg", label: "Tractocamión TSL con caja de 53 pies" },
+  { unit: "Camionetas de reparto", src: "/img/flota/camioneta.jpg", label: "Camioneta de reparto TSL" },
+  { unit: "Torton / Rabón", label: "Torton o rabón TSL", hint: "Completo, de lado o de 3/4" },
+  { unit: "Refrigerados y plataformas", label: "Unidad refrigerada o plataforma", hint: "Completa, de lado o de 3/4" },
 ];
 
 export const basePhotos: Record<string, Photo> = {
-  "Querétaro": { label: "Patio Querétaro" },
-  "San Miguel de Allende, Gto.": { label: "Patio San Miguel de Allende" },
+  "Querétaro": { src: "/img/flota/patio-qro.jpg", label: "Tractocamión TSL en patio" },
+  "San Miguel de Allende, Gto.": { src: "/img/flota/patio-sma.jpg", label: "Tractocamión TSL con cajas en patio" },
 };
 
 export const testimonials = [

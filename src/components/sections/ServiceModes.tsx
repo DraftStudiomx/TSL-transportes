@@ -3,11 +3,12 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { gsap, MQ, useGsap } from "@/lib/gsap";
-import { serviceModes } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 import { ArrowIcon } from "../Icons";
 
 /** Tres modalidades de servicio: dedicado, consolidado y cruce fronterizo. */
 export default function ServiceModes() {
+  const { serviceModes } = useContent();
   const ref = useRef<HTMLElement>(null);
 
   useGsap(ref, (mm) => {

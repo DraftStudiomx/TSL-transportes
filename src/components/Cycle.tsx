@@ -2,9 +2,10 @@
 
 import { useRef } from "react";
 import { gsap, MQ, useGsap } from "@/lib/gsap";
-import { cycle } from "@/lib/site";
+import { useContent } from "@/components/ContentProvider";
 
 export default function Cycle() {
+  const { cycle } = useContent();
   const ref = useRef<HTMLElement>(null);
 
   useGsap(ref, (mm) => {

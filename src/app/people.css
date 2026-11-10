@@ -256,3 +256,17 @@
   .unit-photos-grid { grid-template-columns: 1fr; gap: 24px; }
   .unit-photo b { font-size: 16px; }
 }
+
+/* Galería en mobile: una columna; cada foto real completa en su proporción, sin recortes */
+@media (max-width: 899px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: none;
+    grid-auto-rows: auto;
+    gap: 14px;
+  }
+  .gallery-item { grid-area: auto !important; }
+  .gallery-item .photo-slot { height: auto; aspect-ratio: 16 / 9; }
+  .gallery-item .photo-slot.has-photo { aspect-ratio: auto; }
+  .gallery-item .photo-slot.has-photo img { height: auto; }
+}

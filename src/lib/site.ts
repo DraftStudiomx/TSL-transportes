@@ -268,10 +268,10 @@ export const team: { photo: Photo; name: string; role: string }[] = [
 
 export const operationPhotos: Photo[] = [
   { label: "Operador junto a su unidad", hint: "Con uniforme, mirando a cámara" },
-  { src: "/img/flota/salida-nocturna.jpg", label: "Unidad TSL lista para salir de noche" },
+  { src: "/img/flota/noche-frontal.jpg", label: "Operación nocturna en ruta" },
   { src: "/img/flota/patio-unidades.jpg", label: "Patio con unidades TSL" },
   { label: "Seguimiento en tiempo real", hint: "Persona con pantalla o celular" },
-  { src: "/img/flota/noche-frontal.jpg", label: "Operación nocturna en ruta" },
+  { label: "Maniobra de carga en andén", hint: "Montacargas o tarimas, en acción" },
 ];
 
 /** Fotos reales por tipo de unidad (Servicios). Sin `src` se muestra como foto pendiente. */

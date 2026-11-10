@@ -35,7 +35,7 @@ export default function UnitPhotos() {
         <ul className="unit-photos-grid">
           {unitPhotos.map((u) => (
             <li key={u.unit} className="unit-photo">
-              <PhotoSlot photo={u} ratio="4 / 5" />
+              <PhotoSlot photo={u} ratio="4 / 3" />
               <b>{u.unit}</b>
             </li>
           ))}
